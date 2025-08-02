@@ -18,10 +18,10 @@ class api extends model
  
     public function paginacaoFilms(){
     $TOKEN_GET = $this->token1;
-    //$token =  $this->token1;
+    $token =  $this->token1;
     $curl = curl_init();
         curl_setopt_array($curl, array(
-          CURLOPT_URL => "https://api.themoviedb.org/3/movie/popular?api_key=ba8c2a9fbdb79394a343cf2418f43375&language=pt-BR",
+          CURLOPT_URL => "https://api.themoviedb.org/3/movie/popular?api_key=$token&language=pt-BR",
           CURLOPT_RETURNTRANSFER => true,
           CURLOPT_ENCODING => '',
           CURLOPT_MAXREDIRS => 10,
