@@ -17,7 +17,6 @@ class api extends model
     }
  
     public function paginacaoFilms(){
-    $TOKEN_GET = $this->token1;
     $token =  $this->token1;
     $curl = curl_init();
         curl_setopt_array($curl, array(
