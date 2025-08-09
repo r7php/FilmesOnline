@@ -17,7 +17,6 @@ class api extends model
         $this->token1 = $token1;
         
     }
-
     private function remover_acentos($string) {
     $comAcentos = ['á','à','ã','â','ä','é','è','ê','ë','í','ì','î','ï','ó','ò','õ','ô','ö','ú','ù','û','ü','ç','Á','À','Ã','Â','Ä','É','È','Ê','Ë','Í','Ì','Î','Ï','Ó','Ò','Õ','Ô','Ö','Ú','Ù','Û','Ü','Ç','´','`','^','~','¨'];
     $semAcentos = ['a','a','a','a','a','e','e','e','e','i','i','i','i','o','o','o','o','o','u','u','u','u','c','A','A','A','A','A','E','E','E','E','I','I','I','I','O','O','O','O','O','U','U','U','U','C','','','','',''];
@@ -32,14 +31,6 @@ class api extends model
         curl_setopt_array($curl, array(
           CURLOPT_URL => "https://api.themoviedb.org/3/search/movie?api_key=$token&query=".urlencode($fimeNameCorrigido)."&language=pt-BR",
             CURLOPT_RETURNTRANSFER => true,
-
- 
-    public function paginacaoFilms(){
-    $token =  $this->token1;
-    $curl = curl_init();
-        curl_setopt_array($curl, array(
-          CURLOPT_URL => "https://api.themoviedb.org/3/movie/popular?api_key=$token&language=pt-BR",
-          CURLOPT_RETURNTRANSFER => true,
           CURLOPT_ENCODING => '',
           CURLOPT_MAXREDIRS => 10,
           CURLOPT_TIMEOUT => 0,
