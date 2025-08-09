@@ -1,10 +1,18 @@
 <?php 
-$img = $dados['poster_path'] ?? '';
-$overview = $dados['overview'] ?? 'Sinopse não disponível.';
+
+// echo '<pre>';
+// var_dump($dados);
+
+$img = $dados['data']['poster_path'] ?? '';
+$overview = $dados['data']['overview'] ?? 'Sinopse não disponível.';
 $tempo_filme = $tempo_filme ?? 0; 
-$release_date = $dados['release_date'] ?? 'Data desconhecida';
-$runtime = $dados['runtime'] ?? '---';
-$imdb_id = $dados['imdb_id'] ?? '';
+$release_date = $dados['data']['release_date'] ?? 'Data desconhecida';
+$runtime = $dados['data']['runtime'] ?? '---';
+$imdb_id = $dados['data']['imdb_id'] ?? '';
+$elenco = $dados['elenco'];
+$vote_average = $dados['data']['vote_average'] ?? '';
+
+
 ?>
 
 <!DOCTYPE html>
@@ -20,6 +28,18 @@ $imdb_id = $dados['imdb_id'] ?? '';
       color: #fff;
       font-family: 'Segoe UI', Arial, sans-serif;
     }
+    .elenco-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.elenco-foto {
+    width: 15%;
+    border-radius: 5px;
+    object-fit: cover;
+}
+
     .movie-container {
       max-width: 1100px;
       margin: 50px auto;
@@ -83,6 +103,29 @@ $imdb_id = $dados['imdb_id'] ?? '';
       border-radius: 12px;
       margin-bottom: 30px;
     }
+    .elenco-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: flex-start;
+}
+
+.elenco-item {
+    width: 15%;
+}
+
+.elenco-foto {
+    width: 100%;
+    border-radius: 5px;
+    object-fit: cover;
+}
+
+.elenco-nome {
+    font-size: 0.9rem;
+    color: #ddd;
+    margin: 0;
+}
+
     @media (max-width: 768px) {
       .movie-poster {
         border-radius: 12px 12px 0 0;
@@ -110,7 +153,7 @@ $imdb_id = $dados['imdb_id'] ?? '';
     <div class="col-md-5">
       <img src="https://www.themoviedb.org/t/p/w780/<?php echo ltrim($img, '/'); ?>" 
            alt="Poster do Filme" 
-           class="movie-poster">
+           class="movie-poster" style="max-height:900px;">
     </div>
 
     <!-- Detalhes -->
@@ -119,7 +162,7 @@ $imdb_id = $dados['imdb_id'] ?? '';
       <div class="movie-info">
         <p><strong>Lançamento:</strong> <?php echo htmlspecialchars($release_date); ?></p>
         <p><strong>Duração:</strong> <?php echo htmlspecialchars($runtime); ?> min</p>
-        <p><strong>Avaliação:</strong> ⭐ 7.5 / 10</p>
+        <p><strong>Avaliação:</strong> ⭐ <?php echo $vote_average; ?>/ 10 </p>
         <p><strong>Tempo desde o lançamento:</strong> <?php echo htmlspecialchars($tempo_filme); ?> anos</p>
       </div>
 
@@ -133,6 +176,36 @@ $imdb_id = $dados['imdb_id'] ?? '';
       <div class="sinopse mt-4">
         <h4>Sinopse</h4>
         <p><?php echo nl2br(htmlspecialchars($overview)); ?></p>
+        <hr>
+       <h4>Elenco Principal</h4>
+
+        <div class="elenco-container">
+        <?php 
+        if (!empty($dados['elenco'])):  
+            $limit = 10;
+            $count = 0;
+            foreach ($dados['elenco'] as $ator):
+               if ($count >= $limit) {
+                 break; // sai do loop ao chegar no limite
+                }
+                if (!empty($ator['profile_path'])):
+                    $urlImagem = 'https://image.tmdb.org/t/p/original' . htmlspecialchars($ator['profile_path']);
+                    $nomeAtor = htmlspecialchars($ator['name'] ?? 'Ator');
+        ?>
+            <div class="elenco-item text-center">
+                <img src="<?= $urlImagem ?>" alt="Foto de <?= $nomeAtor ?>" class="elenco-foto" />
+                <p class="elenco-nome mt-1"><?= $nomeAtor ?></p>
+            </div>
+        <?php
+                endif;
+                $count++;
+            endforeach;
+        endif;
+        ?>
+        </div>
+
+
+
       </div>
     </div>
   </div>

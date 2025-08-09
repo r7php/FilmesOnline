@@ -6,7 +6,10 @@
 
  
         public function index(){    
-            $dados = array('dados'=>'');
+            $dados = array('
+                dados'=>''
+            );
+
             $token2 =  $_ENV['TOKEN_BEARER'];
             $a = new api($token2);
 
@@ -14,11 +17,15 @@
 
                $id = $_GET['id'];
                $data = $a->movieId($id);
-        
-               
+               $elenco = $a->elencoFilme($id);
+            
+                $cast = $elenco['cast'];
+       
+
+               //var_dump($elenco['cast']);
                //echo json_encode($response);
 
-               $dados['dados'] = $data;
+               $dados['dados'] = ["data"=>$data, "elenco"=>$cast];
 
 
             }

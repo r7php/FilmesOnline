@@ -70,10 +70,11 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto" >
-          <li class="nav-item"><a class="nav-link" href="#" style="color: red;">Início</a></li>
+
+          <li class="nav-item"><a class="nav-link" href="<?php echo BASE_URL; ?>" style="color: red;">Início</a></li>
           <li class="nav-item"><a class="nav-link" href="#" style="color: red;">Filmes</a></li>
-          <li class="nav-item"><a class="nav-link" href="#" style="color: red;">Series</a></li>
-          <li class="nav-item"><a class="nav-link" href="#" style="color: red;">Sobre</a></li>
+          <li class="nav-item"><a class="nav-link" href="#" style="color: red;"><input type="text" id="filmeinput" class="form-control"></a></li>
+          <li class="nav-item"><a class="nav-link" href="#" style="color: red;"><input type="button" id="submitFilme" placeholder="Ex:Superman" value="Pesquisar" class="btn btn-danger"></a></li>
         </ul>
       </div>
     </div>

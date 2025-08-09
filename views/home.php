@@ -33,6 +33,7 @@
 
 </style>
 
+
    <div class="container mt-5">
         <div class="row g-4" id="cards-container">
 
@@ -54,11 +55,53 @@
 
 
 document.addEventListener("DOMContentLoaded", function () {
-    // Pega o atributo data-base-url do body
+
     const baseUrl = document.body.dataset.baseUrl;
+    const container = document.getElementById("cards-container");
+    let input = document.getElementById("submitFilme");
+    input.addEventListener("click",function(){
+       let nomeFilme = document.getElementById("filmeinput").value;
+        fetch(`${baseUrl}/api/buscar_filme_nome`, {
+            method:"POST",
+            headers:{
+                "Content-Type": "application/json",      
+            },
+            body:JSON.stringify({
+                nomeFilme:nomeFilme
+            })
+        })
+        .then(response=>response.json())
+        .then(data=>{
+                const dt3 = data.results;
+                    document.getElementById("cards-container").innerHTML = "";
 
-    // let pageList = document.getElementById("pageList").val;
+                    dt3.forEach(filme3 =>{
+                        const title = filme3.original_title;
+                        const release_date = filme3.release_date.substring(0, 4);
+                        const path = filme3.poster_path;
+                        const img = `https://www.themoviedb.org/t/p/w1280/${path}`;
+                        const id = filme3.id;
 
+
+                        const card = document.createElement("div");
+                        card.classList.add("col-md-4");
+                        card.innerHTML = `
+                            <div class='image-container'>
+                                <a href='detalhes/?id=${id}'><img src='${img}'></a>
+                            </div>
+                            <h5 class="card-title">${title}</h5>
+                            <p class='date'>${release_date}</p>
+                            <a href='detalhes/?id=${release_date}'>
+                                <button class="btn btn-primary">Detalhes</button>
+                            </a>
+                        `;
+                        container.appendChild(card);
+
+
+                                
+                });
+        });
+    });
 
     fetch(`${baseUrl}/api/buscar_filme`, {
         method: 'GET'
@@ -83,34 +126,76 @@ document.addEventListener("DOMContentLoaded", function () {
             container2.appendChild(input)
             
             input.addEventListener("click", function () {
-                 console.log("Botão clicado:", this.value);
-            });
+                 let id = this.value;
+                 // window.location.href = `${baseUrl}/?page=${id}`;
 
-        }
+                fetch(`${baseUrl}/api/buscarFilmeID`, {
+                    method: 'POST',
+                    headers:{
+                         "Content-Type": "application/json",      
+                    },
+                    body:JSON.stringify({
+                        id:id
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data);
+                    const dt2 = data.results;
+                    document.getElementById("cards-container").innerHTML = "";
+
+                    dt2.forEach(filme2 =>{
+                        const title = filme2.original_title;
+                        const release_date = filme2.release_date.substring(0, 4);
+                        const path = filme2.poster_path;
+                        const img = `https://www.themoviedb.org/t/p/w1280/${path}`;
+                        const id = filme2.id;
+
+                        const card = document.createElement("div");
+                        card.classList.add("col-md-4");
+                        card.innerHTML = `
+                            <div class='image-container'>
+                                <a href='detalhes/?id=${id}'><img src='${img}'></a>
+                            </div>
+                            <h5 class="card-title">${title}</h5>
+                            <p class='date'>${release_date}</p>
+                            <a href='detalhes/?id=${release_date}'>
+                                <button class="btn btn-primary">Detalhes</button>
+                            </a>
+                        `;
+                        container.appendChild(card);
+                                
+                        });
+                        window.scrollTo({ top: 0, behavior: "smooth" });
+
+                    });
+                });
+
+            }
     
-        dt.forEach(filme => {
+            dt.forEach(filme => {
 
-        
-            const title = filme.original_title;
-            const release_date = filme.release_date.substring(0, 4);
-            const path = filme.poster_path;
-            const img = `https://www.themoviedb.org/t/p/w1280/${path}`;
-            const id = filme.id;
+            
+                const title = filme.original_title;
+                const release_date = filme.release_date.substring(0, 4);
+                const path = filme.poster_path;
+                const img = `https://www.themoviedb.org/t/p/w1280/${path}`;
+                const id = filme.id;
 
-            const card = document.createElement("div");
-            card.classList.add("col-md-4");
-            card.innerHTML = `
-                <div class='image-container'>
-                    <a href='detalhes/?id=${id}'><img src='${img}'></a>
-                </div>
-                <h5 class="card-title">${title}</h5>
-                <p class='date'>${release_date}</p>
-                <a href='detalhes/?id=${release_date}'>
-                    <button class="btn btn-primary">Detalhes</button>
-                </a>
-            `;
-            container.appendChild(card);
-        });
+                const card = document.createElement("div");
+                card.classList.add("col-md-4");
+                card.innerHTML = `
+                    <div class='image-container'>
+                        <a href='detalhes/?id=${id}'><img src='${img}'></a>
+                    </div>
+                    <h5 class="card-title">${title}</h5>
+                    <p class='date'>${release_date}</p>
+                    <a href='detalhes/?id=${release_date}'>
+                        <button class="btn btn-primary">Detalhes</button>
+                    </a>
+                `;
+                container.appendChild(card);
+            });
 
     })
     .catch(error => {

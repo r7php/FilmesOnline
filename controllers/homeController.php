@@ -12,8 +12,7 @@
             $a = new api($token1);
             
             // $token2 =  getenv('TOKEN_BEARER');
-            $total = $a->paginacaoFilms();
-            $dados['total'] = $total;
+
             $this->loadTemplate('home', $dados);
         }
 
