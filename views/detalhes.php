@@ -2,17 +2,19 @@
 
 // echo '<pre>';
 // var_dump($dados);
-
 $img = $dados['data']['poster_path'] ?? '';
 $overview = $dados['data']['overview'] ?? 'Sinopse não disponível.';
-$tempo_filme = $tempo_filme ?? 0; 
 $release_date = $dados['data']['release_date'] ?? 'Data desconhecida';
+$hoje = date_create(date('Y-m-d'));
+$filme_date = date_create($release_date);
+$diff = date_diff($filme_date, $hoje);
+$tempo_filme = $diff->format("%y anos");
+
+
 $runtime = $dados['data']['runtime'] ?? '---';
 $imdb_id = $dados['data']['imdb_id'] ?? '';
 $elenco = $dados['elenco'];
 $vote_average = $dados['data']['vote_average'] ?? '';
-
-
 ?>
 
 <!DOCTYPE html>
@@ -107,7 +109,7 @@ $vote_average = $dados['data']['vote_average'] ?? '';
     display: flex;
     flex-wrap: wrap;
     gap: 15px;
-    justify-content: flex-start;
+
 }
 
 .elenco-item {
@@ -117,13 +119,13 @@ $vote_average = $dados['data']['vote_average'] ?? '';
 .elenco-foto {
     width: 100%;
     border-radius: 5px;
-    object-fit: cover;
+
 }
 
 .elenco-nome {
     font-size: 0.9rem;
     color: #ddd;
-    margin: 0;
+    
 }
 
     @media (max-width: 768px) {
