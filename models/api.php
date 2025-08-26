@@ -29,7 +29,7 @@ class api extends model
        $fimeNameCorrigido = $this->remover_acentos($nomeFilme);
        $curl = curl_init();
         curl_setopt_array($curl, array(
-          CURLOPT_URL => "https://api.themoviedb.org/3/search/movie?api_key=$token&query=".urlencode($fimeNameCorrigido)."&language=pt-BR",
+          CURLOPT_URL => "https://api.themoviedb.org/3/search/movie?api_key=ba8c2a9fbdb79394a343cf2418f43375&query=".urlencode($fimeNameCorrigido)."&language=pt-BR",
             CURLOPT_RETURNTRANSFER => true,
           CURLOPT_ENCODING => '',
           CURLOPT_MAXREDIRS => 10,
@@ -74,7 +74,7 @@ class api extends model
           CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
           CURLOPT_CUSTOMREQUEST => 'GET',
           CURLOPT_HTTPHEADER => array(
-            "Authorization: Bearer $token"
+            "Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJiYThjMmE5ZmJkYjc5Mzk0YTM0M2NmMjQxOGY0MzM3NSIsIm5iZiI6MTc1MjU0MjgzNy4wMzksInN1YiI6IjY4NzVhZTc1NDMxM2U3OTk5OTczMmY0ZSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.HPeBLLyAM5HJxDsdkKjFIIHq_BgmWLzF7S2wrWu_zIg "
           ),
         ));
 
@@ -117,7 +117,7 @@ class api extends model
           CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
           CURLOPT_CUSTOMREQUEST => 'GET',
           CURLOPT_HTTPHEADER => array(
-            "Authorization: Bearer $token"
+            "Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJiYThjMmE5ZmJkYjc5Mzk0YTM0M2NmMjQxOGY0MzM3NSIsIm5iZiI6MTc1MjU0MjgzNy4wMzksInN1YiI6IjY4NzVhZTc1NDMxM2U3OTk5OTczMmY0ZSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.HPeBLLyAM5HJxDsdkKjFIIHq_BgmWLzF7S2wrWu_zIg "
           ),
         ));
 
@@ -161,7 +161,7 @@ class api extends model
        $token = $this->token1;
        $curl = curl_init();
         curl_setopt_array($curl, array(
-          CURLOPT_URL => "https://api.themoviedb.org/3/movie/popular?api_key=$token&language=pt-BR&page=$count",
+          CURLOPT_URL => "https://api.themoviedb.org/3/movie/popular?api_key=ba8c2a9fbdb79394a343cf2418f43375&language=pt-BR&page=$count",
           CURLOPT_RETURNTRANSFER => true,
           CURLOPT_ENCODING => '',
           CURLOPT_MAXREDIRS => 10,
@@ -194,7 +194,7 @@ class api extends model
        $token = $this->token1;
        $curl = curl_init();
         curl_setopt_array($curl, array(
-          CURLOPT_URL => "https://api.themoviedb.org/3/movie/popular?api_key=$token&language=pt-BR",
+          CURLOPT_URL => "https://api.themoviedb.org/3/movie/popular?api_key=ba8c2a9fbdb79394a343cf2418f43375&language=pt-BR",
           CURLOPT_RETURNTRANSFER => true,
           CURLOPT_ENCODING => '',
           CURLOPT_MAXREDIRS => 10,

@@ -2,7 +2,7 @@
 require 'environment.php';
 require 'vendor/autoload.php';
 $config = array();
-define("BASE_URL","http://54.207.229.254/FilmesOnline");
+define("BASE_URL","http://localhost/filmes");
 
 use Dotenv\Dotenv;
 $dotenv = Dotenv::createImmutable(__DIR__);
