@@ -122,7 +122,7 @@
         @if(request()->has('movie'))
          <div class="col-12">
     <iframe
-        src="https://vidsrc.xyz/embed/movie/{{ $data['imdb_id'] }}"
+        src="https://vidsrc.sbs/embed/movie/{{ request()->route('id') }}"
         title="Filme"
         width="100%"
         height="500"
@@ -154,7 +154,7 @@
       {{-- <form method="POST" class="mt-3">
         @csrf --}}
         <div class="d-flex flex-wrap gap-3">
-        <a href="https://vidsrc.xyz/embed/movie/{{ $data['imdb_id'] }}" target="_blank">
+        <a href="https://vidsrc.sbs/embed/movie/{{ request()->route('id') }}" target="_blank">
   <button name="movie" class="btn btn-custom btn-watch">▶ Assistir</button></a>
           <button type="button" class="btn btn-custom btn-share">🔗 Compartilhar</button>
         </div>
